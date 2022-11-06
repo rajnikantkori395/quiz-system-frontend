@@ -28,7 +28,7 @@ export const Question = () => {
     function getAnswer() {
         if (questionCount.current >= 10) {
             // alert('done',score)
-            
+
             return navigate('/score', { state: score });
         }
         else {
@@ -42,7 +42,7 @@ export const Question = () => {
             }
             else {
                 if (difficulty.current === 1) {
-                    setScore(score -2);
+                    setScore(score - 2);
                     return navigate('/score', { state: score });
                 }
                 setScore(score - 2);
@@ -88,22 +88,22 @@ export const Question = () => {
                     <h5 className="card-title">{ques.title}</h5>
 
                     <div className="form-check">
-                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[0]} defaultChecked={false}/>
+                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[0]} defaultChecked={false} />
                         <span>  {options[0]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="address"onClick={(e) => setAnswer(e.target.value)} value={options[1]} defaultChecked={false} />
+                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[1]} defaultChecked={false} />
                         <span>  {options[1]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="address"onClick={(e) => setAnswer(e.target.value)} value={options[2]} defaultChecked={false} />
+                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[2]} defaultChecked={false} />
                         <span>  {options[2]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="address"onClick={(e) => setAnswer(e.target.value)} value={options[3]} defaultChecked={false} />
+                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[3]} defaultChecked={false} />
                         <span>  {options[3]}</span>
                     </div>
-                   
+
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>
             </div>
