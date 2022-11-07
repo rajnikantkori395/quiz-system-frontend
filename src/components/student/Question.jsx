@@ -17,7 +17,7 @@ export const Question = () => {
     const ref3 = useRef();
     const ref4 = useRef();
 
-    let filterArr=[];
+    let filterArr = [];
     async function fetchQuestions() {
         await axios('http://localhost:8000/questions', {
             method: "get",
@@ -32,23 +32,23 @@ export const Question = () => {
     }
 
     function getAnswer() {
-        if (questionCount.current >= 10) {
+        if (questionCount.current > 10) {
             // alert('done',score)
             return navigate('/score', { state: score });
         }
         else {
             if (ques.correct === answer) {
                 if (difficulty.current === 10) {
-                    setScore(score + 5);
-                    return navigate('/score', { state: score });
+                    // setScore(score + 5);
+                    return navigate('/score', { state: score + 5 });
                 }
                 setScore(score + 5);
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
-                    setScore(score - 2);
-                    return navigate('/score', { state: score });
+                    // setScore(score - 2);
+                    return navigate('/score', { state: score - 2 });
                 }
                 setScore(score - 2);
                 difficulty.current = difficulty.current - 1;
@@ -61,30 +61,40 @@ export const Question = () => {
 
     async function getQuestion() {
         // to make sure that the randomly generated question is of given difficulty
-        while (true) {
-            let questions = JSON.parse(localStorage.getItem('questions'));
-            console.log(questions);
-            filterArr = questions.filter((e)=> e.difficulty<=10)
-            let i = questions[Math.floor(Math.random() * filterArr.length)];
-            // to make sure that the randomly generated question is of given difficulty
-            if (i.difficulty === difficulty.current) {
-                setQues(i);
-                setOptions(i.options);
-                return;
-            }
-        }
-
+        let questions = JSON.parse(localStorage.getItem('questions'));
+        console.log(questions);
+        filterArr = questions.filter((e) => e.difficulty === difficulty.current);
+        let i = filterArr[Math.floor(Math.random() * filterArr.length)];
+        // to make sure that the randomly generated question is of given difficulty
+        setQues(i);
+        setOptions(i.options);
     }
-    const onAnswerSelect = (e) => {
-        setAnswer(e.target.value);
-        console.log(e.target.value);
-        console.log(ref1.current.checked);
-        ref1.current.checked = false;
+
+    let colorArr = [
+        ref1,
+        ref2,
+        ref3,
+        ref4
+    ]
+    const onAnswerSelect = async (e) => {
+        colorArr.forEach((e) => {
+            e.current.style.color = 'black'
+        });
+        e.target.style.color = 'green';
+        console.log(e.target.innerHTML);
     }
 
     useEffect(() => {
-        fetchQuestions();
+        console.log('update');
+        ref1.current.style.color = 'black';
+        ref2.current.style.color = 'black';
+        ref3.current.style.color = 'black';
+        ref4.current.style.color = 'black';
+    }, [questionCount.current])
 
+    useEffect(() => {
+        fetchQuestions();
+        console.log('mount');
     }, [])
 
     return (
@@ -97,23 +107,29 @@ export const Question = () => {
 
                 <div className="card-body"  >
                     <h5 className="card-title">{ques.title}</h5>
-                    <div onChange={onAnswerSelect}>
-                        <div className="form-check">
-                            <input type="radio" name="option" ref={ref1} defaultChecked={null} value={options[0]} />
-                            <span>  {options[0]}</span>
-                        </div>
-                        <div className="form-check">
-                            <input type="radio" name="option" ref={ref2} defaultChecked={null} value={options[1]} />
-                            <span>  {options[1]}</span>
-                        </div>
-                        <div className="form-check">
-                            <input type="radio" name="option" ref={ref3} defaultChecked={null} value={options[2]} />
-                            <span>  {options[2]}</span>
-                        </div>
-                        <div className="form-check">
-                            <input type="radio" name="option" ref={ref4} defaultChecked={null} value={options[3]} />
-                            <span>  {options[3]}</span>
-                        </div>
+                    <div className="form-check">
+                        <div ref={ref1} style={{ color: 'black' }} onClick={(e) => {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[0]}</div>
+                    </div>
+                    <div className="form-check">
+                        <div ref={ref2} style={{ color: 'black' }} onClick={(e) => {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[1]}</div>
+                    </div>
+                    <div className="form-check">
+                        <div ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[2]}</div>
+                    </div>
+                    <div className="form-check">
+                        <div ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[3]}</div>
                     </div>
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>
