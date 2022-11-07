@@ -12,8 +12,12 @@ export const Question = () => {
     const questionCount = useRef(1);
     const navigate = useNavigate();
 
-    const ref = useRef();
+    const ref1 = useRef();
+    const ref2 = useRef();
+    const ref3 = useRef();
+    const ref4 = useRef();
 
+    let filterArr=[];
     async function fetchQuestions() {
         await axios('http://localhost:8000/questions', {
             method: "get",
@@ -60,7 +64,8 @@ export const Question = () => {
         while (true) {
             let questions = JSON.parse(localStorage.getItem('questions'));
             console.log(questions);
-            let i = questions[Math.floor(Math.random() * questions.length)];
+            filterArr = questions.filter((e)=> e.difficulty<=10)
+            let i = questions[Math.floor(Math.random() * filterArr.length)];
             // to make sure that the randomly generated question is of given difficulty
             if (i.difficulty === difficulty.current) {
                 setQues(i);
@@ -72,7 +77,9 @@ export const Question = () => {
     }
     const onAnswerSelect = (e) => {
         setAnswer(e.target.value);
-        ref.current.checked = false;
+        console.log(e.target.value);
+        console.log(ref1.current.checked);
+        ref1.current.checked = false;
     }
 
     useEffect(() => {
@@ -88,23 +95,25 @@ export const Question = () => {
                     <h5 className='col-3'>Difficulty level : {ques.difficulty}</h5>
                 </div>
 
-                <div className="card-body" onChange={onAnswerSelect} >
+                <div className="card-body"  >
                     <h5 className="card-title">{ques.title}</h5>
-                    <div className="form-check">
-                        <input type="radio" name="option" ref={ref} checked={null} value={options[0]} />
-                        <span>  {options[0]}</span>
-                    </div>
-                    <div className="form-check">
-                        <input type="radio" name="option" ref={ref} checked={null} value={options[1]} />
-                        <span>  {options[1]}</span>
-                    </div>
-                    <div className="form-check">
-                        <input type="radio" name="option" ref={ref} checked={null} value={options[2]} />
-                        <span>  {options[2]}</span>
-                    </div>
-                    <div className="form-check">
-                        <input type="radio" name="option" ref={ref} checked={null} value={options[3]} />
-                        <span>  {options[3]}</span>
+                    <div onChange={onAnswerSelect}>
+                        <div className="form-check">
+                            <input type="radio" name="option" ref={ref1} defaultChecked={null} value={options[0]} />
+                            <span>  {options[0]}</span>
+                        </div>
+                        <div className="form-check">
+                            <input type="radio" name="option" ref={ref2} defaultChecked={null} value={options[1]} />
+                            <span>  {options[1]}</span>
+                        </div>
+                        <div className="form-check">
+                            <input type="radio" name="option" ref={ref3} defaultChecked={null} value={options[2]} />
+                            <span>  {options[2]}</span>
+                        </div>
+                        <div className="form-check">
+                            <input type="radio" name="option" ref={ref4} defaultChecked={null} value={options[3]} />
+                            <span>  {options[3]}</span>
+                        </div>
                     </div>
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>

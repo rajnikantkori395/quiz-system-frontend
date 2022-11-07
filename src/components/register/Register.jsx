@@ -23,7 +23,7 @@ export const Register = () => {
         }
     }
     return (
-        <div>  <form>
+        <div>  <form onSubmit={handleSubmit}>
             <div className="row mb-3">
                 <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</label>
                 <div className="col-sm-10">
@@ -43,7 +43,7 @@ export const Register = () => {
                 </div>
             </div>
 
-            <button type="submit" onClick={handleSubmit} className="btn btn-dark">Sign Up</button>
+            <button type="submit" className="btn btn-dark">Sign Up</button>
             <span> OR</span>
             <Link to='/login' className="btn btn-outline-dark ms-2">Sign in</Link>
         </form></div>
