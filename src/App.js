@@ -11,24 +11,6 @@ import { Score } from './components/student/Score';
 
 function App() {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-  // const [session, setSession] = useState(10);
-  // const navigate = useNavigate();
-
-  // let timer = setInterval(() => {
-  //   setSession((session) => {
-  //     if (session === 0) {
-  //       clearInterval(session);
-  //       navigate('/login');
-  //       localStorage.clear();
-  //       return 0;
-  //     } else return session - 1;
-  //   });
-  // }, 1000);
-
-  // useEffect(() => {
-
-  //   timer();
-  // }, [token]);
 
   return (
     <BrowserRouter>
