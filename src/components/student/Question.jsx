@@ -19,7 +19,7 @@ export const Question = () => {
 
     let filterArr = [];
     async function fetchQuestions() {
-        await axios('http://localhost:8000/questions', {
+        await axios('https://quiz-system-rk.herokuapp.com/questions', {
             method: "get",
             headers: { "Content-Type": "application/json" }
         }).then((res) => {

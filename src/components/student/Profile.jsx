@@ -12,7 +12,7 @@ export const Profile = ({ setToken }) => {
     let token = JSON.parse(localStorage.getItem('token'));
 
     async function fetchData() {
-        let url = 'http://localhost:8000/profile';
+        let url = 'https://quiz-system-rk.herokuapp.com/profile';
         await axios(url, {
             method: "get",
             headers: { "Authorization": "Bearer " + token },

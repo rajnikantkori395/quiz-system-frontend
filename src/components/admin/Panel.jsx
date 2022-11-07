@@ -18,7 +18,7 @@ export const Panel = ({setToken}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios('http://localhost:8000/questions', {
+        await axios('https://quiz-system-rk.herokuapp.com/questions', {
             method: "post",
             data: JSON.stringify({
                 title: title,
