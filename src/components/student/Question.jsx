@@ -32,7 +32,7 @@ export const Question = () => {
     }
 
     function getAnswer() {
-        if (questionCount.current > 10) {
+        if (questionCount.current == 10) {
             // alert('done',score)
             return navigate('/score', { state: score });
         }
@@ -107,29 +107,29 @@ export const Question = () => {
 
                 <div className="card-body"  >
                     <h5 className="card-title">{ques.title}</h5>
-                    <div className="form-check">
-                        <div ref={ref1} style={{ color: 'black' }} onClick={(e) => {
+                    <div className="form-check">a. &nbsp;
+                        <span ref={ref1} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
                            return onAnswerSelect(e);
-                        }}>{options[0]}</div>
+                        }}>{options[0]}</span>
                     </div>
-                    <div className="form-check">
-                        <div ref={ref2} style={{ color: 'black' }} onClick={(e) => {
+                    <div className="form-check">b. &nbsp;
+                        <span ref={ref2} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
                            return onAnswerSelect(e);
-                        }}>{options[1]}</div>
+                        }}>{options[1]}</span>
                     </div>
-                    <div className="form-check">
-                        <div ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
+                    <div className="form-check">c. &nbsp; 
+                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
                             setAnswer(e.target.innerHTML);
                            return onAnswerSelect(e);
-                        }}>{options[2]}</div>
+                        }}>{options[2]}</span>
                     </div>
-                    <div className="form-check">
-                        <div ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
+                    <div className="form-check">d. &nbsp;
+                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
                             setAnswer(e.target.innerHTML);
                            return onAnswerSelect(e);
-                        }}>{options[3]}</div>
+                        }}>{options[3]}</span>
                     </div>
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>
