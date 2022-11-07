@@ -12,6 +12,8 @@ export const Question = () => {
     const questionCount = useRef(1);
     const navigate = useNavigate();
 
+    const ref = useRef();
+
     async function fetchQuestions() {
         await axios('http://localhost:8000/questions', {
             method: "get",
@@ -28,7 +30,6 @@ export const Question = () => {
     function getAnswer() {
         if (questionCount.current >= 10) {
             // alert('done',score)
-
             return navigate('/score', { state: score });
         }
         else {
@@ -69,7 +70,10 @@ export const Question = () => {
         }
 
     }
-
+    const onAnswerSelect = (e) => {
+        setAnswer(e.target.value);
+        ref.current.checked = false;
+    }
 
     useEffect(() => {
         fetchQuestions();
@@ -84,26 +88,24 @@ export const Question = () => {
                     <h5 className='col-3'>Difficulty level : {ques.difficulty}</h5>
                 </div>
 
-                <div className="card-body">
+                <div className="card-body" onChange={onAnswerSelect} >
                     <h5 className="card-title">{ques.title}</h5>
-
                     <div className="form-check">
-                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[0]} defaultChecked={false} />
+                        <input type="radio" name="option" ref={ref} checked={null} value={options[0]} />
                         <span>  {options[0]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[1]} defaultChecked={false} />
+                        <input type="radio" name="option" ref={ref} checked={null} value={options[1]} />
                         <span>  {options[1]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[2]} defaultChecked={false} />
+                        <input type="radio" name="option" ref={ref} checked={null} value={options[2]} />
                         <span>  {options[2]}</span>
                     </div>
                     <div className="form-check">
-                        <input type="radio" name="option" onChange={(e) => setAnswer(e.target.value)} value={options[3]} defaultChecked={false} />
+                        <input type="radio" name="option" ref={ref} checked={null} value={options[3]} />
                         <span>  {options[3]}</span>
                     </div>
-
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>
             </div>

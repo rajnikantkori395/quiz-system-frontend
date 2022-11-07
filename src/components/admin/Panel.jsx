@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-export const Panel = () => {
+export const Panel = ({setToken}) => {
 
     const navigate = useNavigate();
     const [option1, setOption1] = useState('');
@@ -120,6 +120,7 @@ export const Panel = () => {
                     <div className="row mb-3 justify-content-evenly">
                         <div className='col-lg-5'>
                             <button className='btn btn-outline-dark' onClick={() => {
+                                 setToken(null);
                                 localStorage.clear();
                                 navigate('/login');
                             }}>Logout</button>

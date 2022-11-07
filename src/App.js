@@ -37,9 +37,9 @@ function App() {
         <Routes>
           <Route path='/' element={token == null ? <CardRegister /> : <Profile />} />
           <Route path='/login' element={<Card setToken={setToken} />} />
-          <Route path='/score' element={token == null ? <CardRegister /> : <Score />} />
-          <Route path='/profile' element={token == null ? <CardRegister /> : <Profile />} />
-          <Route path='/admin/panel' element={token == null ? <CardRegister /> : <Panel />} />
+          <Route path='/score' element={token == null ? <CardRegister /> : <Score setToken={setToken} />} />
+          <Route path='/profile' element={token == null ? <CardRegister /> : <Profile setToken={setToken} />} />
+          <Route path='/admin/panel' element={token == null ? <CardRegister /> : <Panel setToken={setToken} />} />
         </Routes>
       </div>
     </BrowserRouter>
