@@ -57,12 +57,11 @@ const Graph = () => {
 
     return (
         <>
-
             <div className="scoreCard">
                 <h3>Score Graph</h3>
                 <svg ref={svgRef}></svg>
                 <br />
-                <h4>Scores: {scoreData.join(',')}</h4>
+                <h5 className="outline-dark">Scores: {scoreData.join(',')}</h5>
             </div>
         </>
     );

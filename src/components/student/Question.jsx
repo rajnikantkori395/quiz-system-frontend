@@ -108,15 +108,15 @@ export const Question = () => {
 
     return (
 
-        <div className='row row-sm-auto align-items-center justify-content-center mt-5 mb-5'>
+        <div className='row align-items-center justify-content-center mt-5 mb-5'>
 
             <div className="card" style={{ width: '60rem' }}>
                 <div className="card-header row justify-content-between">
-                    <h5 className='col-sm-auto col-md-4' >Q. No. {questionCount.current}</h5>
-                    <h5 className='col-sm-auto col-md-4'>Difficulty level : {ques.difficulty}</h5>
+                    <h5 className='col-sm-auto col-md-4 text-dark' >Q. No. {questionCount.current}</h5>
+                    <h5 className='col-sm-auto col-md-4 text-dark'>Difficulty level : {ques.difficulty}</h5>
                 </div>
 
-                <div className="card-body"  >
+                <div className="card-body text-dark"  >
                     <h5 className="card-title">{ques.title}</h5>
                     <div className="form-check">a. &nbsp;
                         <span ref={ref1} style={{ color: 'black' }} onClick={(e) => {
