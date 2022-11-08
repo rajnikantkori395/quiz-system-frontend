@@ -20,6 +20,7 @@ const Graph = () => {
             .style('overflow', 'visible')
             .style('margin-left', '20')
             .style('margin-bottom', '20')
+            .style('padding-right', '20')
 
         //Setting the scale
         const xScale = d3
@@ -57,7 +58,7 @@ const Graph = () => {
 
     return (
         <>
-            <div className="scoreCard">
+            <div className="me-5 scoreCard">
                 <h3>Score Graph</h3>
                 <svg ref={svgRef}></svg>
                 <br />
