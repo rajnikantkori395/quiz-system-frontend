@@ -39,8 +39,8 @@ export const Profile = ({ setToken }) => {
                     <div className="card-body">
                         <h5 className="card-title">
                             <div className="row mt-3 justify-content-between">
-                                <h5 className='col-2' >Student Name : {user}</h5>
-                                <h5 className='col-2'><button className='btn btn-outline-dark' onClick={() => {
+                                <h5 className='col-sm-2'>Student Name : {user}</h5>
+                                <h5 className='col-sm-2'><button className='btn btn-outline-dark' onClick={() => {
                                     setToken(null);
                                     localStorage.clear();
                                     navigate('/login');

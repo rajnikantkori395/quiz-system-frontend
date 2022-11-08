@@ -11,7 +11,6 @@ export const Question = () => {
     const difficulty = useRef(5);
     const questionCount = useRef(1);
     const navigate = useNavigate();
-
     const ref1 = useRef();
     const ref2 = useRef();
     const ref3 = useRef();
@@ -39,14 +38,23 @@ export const Question = () => {
         else {
             if (ques.correct === answer) {
                 if (difficulty.current === 10) {
+                    let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+                    temp_array.push(score + 5);
+                    localStorage.setItem('scoreData', JSON.stringify(temp_array));
                     // setScore(score + 5);
                     return navigate('/score', { state: score + 5 });
                 }
+                let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+                temp_array.push(score);
+                localStorage.setItem('scoreData', JSON.stringify(temp_array));
                 setScore(score + 5);
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
+                    let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+                    temp_array.push(score - 2);
+                    localStorage.setItem('scoreData', JSON.stringify(temp_array));
                     // setScore(score - 2);
                     return navigate('/score', { state: score - 2 });
                 }
@@ -98,11 +106,13 @@ export const Question = () => {
     }, [])
 
     return (
+
         <div className='row align-items-center justify-content-center mt-5 mb-5'>
+
             <div className="card" style={{ width: '60rem' }}>
                 <div className="card-header row justify-content-between">
-                    <h5 className='col-2' >Q. No. {questionCount.current}</h5>
-                    <h5 className='col-3'>Difficulty level : {ques.difficulty}</h5>
+                    <h5 className='col-sm-2 col-md-4' >Q. No. {questionCount.current}</h5>
+                    <h5 className='col-sm-3 col-md-4'>Difficulty level : {ques.difficulty}</h5>
                 </div>
 
                 <div className="card-body"  >
@@ -110,30 +120,33 @@ export const Question = () => {
                     <div className="form-check">a. &nbsp;
                         <span ref={ref1} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[0]}</span>
                     </div>
                     <div className="form-check">b. &nbsp;
                         <span ref={ref2} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[1]}</span>
                     </div>
-                    <div className="form-check">c. &nbsp; 
-                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
+                    <div className="form-check">c. &nbsp;
+                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[2]}</span>
                     </div>
                     <div className="form-check">d. &nbsp;
-                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
+                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[3]}</span>
                     </div>
                     <button onClick={handleClick} className="btn btn-success mt-2">Submit</button>
                 </div>
             </div>
+
         </div>
+
+
     )
 }

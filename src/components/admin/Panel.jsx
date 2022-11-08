@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-export const Panel = ({setToken}) => {
+export const Panel = ({ setToken }) => {
 
     const navigate = useNavigate();
     const [option1, setOption1] = useState('');
@@ -34,16 +34,16 @@ export const Panel = ({setToken}) => {
         }).catch((err) => {
             console.log(err);
         })
-        console.log(type.current,'\n', title, '\n', option1, '\n', option2, '\n', option3, '\n', option4, '\n', '\n', type, '\n', correct);
+
 
     }
 
     return (
-        <div className='row relative-top-200px mt-5 justify-content-evenly' style={{ height: '90vh' }}>
-            <div className="col-md-5 card bg-light mt-3" >
+        <div className='row relative-top-200px mt-5 justify-content-evenly' style={{ minHeight: '90vh' }}>
+            <div className="col-lg-9 card bg-light mt-3md" >
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="row mt-5 mb-3 justify-content-evenly ">
-                        <div className='col-sm-3'>
+                        <div className='col-md-6 col-sm-3'>
                             <h5>Add Question</h5>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ export const Panel = ({setToken}) => {
                         <label htmlFor="correct" className="col-sm-4 col-form-label">Correct Option</label>
                         <div className="col-sm-6">
                             <select className="form-select" onChange={(e) => setCorrect((prev) => prev = e.target.value)} id="correct" aria-label="Default select example">
-                                <option>select</option> 
+                                <option>select</option>
                                 <option value={option1}>Option 1</option>
                                 <option value={option2}>Option 2</option>
                                 <option value={option3}>Option 3</option>
@@ -120,7 +120,7 @@ export const Panel = ({setToken}) => {
                     <div className="row mb-3 justify-content-evenly">
                         <div className='col-lg-5'>
                             <button className='btn btn-outline-dark' onClick={() => {
-                                 setToken(null);
+                                setToken(null);
                                 localStorage.clear();
                                 navigate('/login');
                             }}>Logout</button>
@@ -132,6 +132,7 @@ export const Panel = ({setToken}) => {
                     </div>
                 </form>
             </div>
+
 
 
 

@@ -1,12 +1,31 @@
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Button, Spinner } from 'react-bootstrap';
 
 export const Login = ({ setToken }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const roleRef = useRef();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
+
+    const Loading = () => {
+        return (
+            <Button variant="dark" disabled>
+                <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                />
+                Loading...
+            </Button>
+        )
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -18,6 +37,7 @@ export const Login = ({ setToken }) => {
         }
     }
     const studentLogin = async () => {
+        setLoading(true);
         let url = 'https://quiz-system-rk.herokuapp.com/auth/user/login';
         await axios(url, {
             method: "post",
@@ -25,8 +45,9 @@ export const Login = ({ setToken }) => {
             headers: { "Content-Type": "application/json" }
         }).then((res) => {
             localStorage.setItem('token', JSON.stringify(res.data.access_token));
-        }).catch((err)=>{
-            console.log('username or password mismatch',err);
+            setLoading(false);
+        }).catch((err) => {
+            console.log('username or password mismatch', err);
         })
         let token = JSON.parse(localStorage.getItem('token'));
         setToken(token);
@@ -36,21 +57,27 @@ export const Login = ({ setToken }) => {
         }
         else {
             alert('unauthorized access');
+            setLoading(false);
         }
     }
 
+
+
     const adminLogin = async () => {
+        setLoading(true);
         let url = 'https://quiz-system-rk.herokuapp.com/auth/admin/login';
         await axios(url, {
             method: "post",
             data: JSON.stringify({ username, password }),
             headers: { "Content-Type": "application/json" }
         }).then((res) => {
+            setLoading(false);
             localStorage.setItem('token', JSON.stringify(res.data.access_token));
-        }).catch((err)=>{
-            console.log('username or password mismatch',err);
+        }).catch((err) => {
+            console.log('username or password mismatch', err);
         })
         let token = JSON.parse(localStorage.getItem('token'));
+
         setToken(token);
         if (token) {
             console.log('token', token);
@@ -58,39 +85,46 @@ export const Login = ({ setToken }) => {
         }
         else {
             alert('unauthorized access');
+            setLoading(false);
         }
     }
 
-return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            <div className="row mb-3">
-                <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</label>
-                <div className="col-sm-10">
-                    <input type="text" className="form-control" id="inputEmail3" onChange={(e) => setUsername(e.target.value)} required />
-                </div>
-            </div>
-            <div className="row mb-3">
-                <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
-                <div className="col-sm-10">
-                    <input type="password" className="form-control" id="inputPassword3" onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-            </div>
-            <div className="row mb-3">
-                <label htmlFor="role" className="col-sm-2 col-form-label">User Role</label>
-                <div className="col-sm-10">
-                    <select className="form-select" ref={roleRef} id="role" aria-label="Default select example" required>
-                       
-                        <option value="student">Student</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
+    // const setL = () =>{
+    //     setLoading(!loading);
+    // }
 
-            </div>
-            <button type="submit" className="btn btn-dark">Sign in</button>
-            <span> OR</span>
-            <Link to='/' className="btn btn-outline-dark ms-2">Sign up</Link>
-        </form>
-    </div>
-)
+    return (
+        <div >
+            {loading ? <Loading /> :
+                <form onSubmit={handleSubmit}>
+                    <div className="row mb-3">
+                        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputEmail3" onChange={(e) => setUsername(e.target.value)} required />
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+                        <div className="col-sm-10">
+                            <input type="password" className="form-control" id="inputPassword3" onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label htmlFor="role" className="col-sm-2 col-form-label">User Role</label>
+                        <div className="col-sm-10">
+                            <select className="form-select" ref={roleRef} id="role" aria-label="Default select example" required>
+
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <button type="submit" className="btn btn-dark">Sign in</button>
+                    <span> OR</span>
+                    <Link to='/' className="btn btn-outline-dark ms-2">Sign up</Link>
+                </form>
+            }
+        </div>
+    )
 }
