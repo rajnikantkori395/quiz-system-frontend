@@ -34,13 +34,13 @@ export const Profile = ({ setToken }) => {
 
     return (
         <>
-            <div className='row align-items-center justify-content-center mx-5 ' style={{ minHeight: '96vh' }}>
-                <div className="card mt-5">
+            <div className='row align-items-center justify-content-center' style={{ minHeight: '96vh' }}>
+                <div className="card col mt-5">
                     <div className="card-body">
-                        <h5 className="card-title">
+                        <h5 className="card-title row">
                             <div className="row mt-3 justify-content-between">
-                                <h5 className='col-sm-2'>Student Name : {user}</h5>
-                                <h5 className='col-sm-2'><button className='btn btn-outline-dark' onClick={() => {
+                                <h5 className='col-sm-10'>Student Name : {user}</h5>
+                                <h5 className='col-sm-1'><button className='btn btn-outline-dark' onClick={() => {
                                     setToken(null);
                                     localStorage.clear();
                                     navigate('/login');
@@ -50,7 +50,7 @@ export const Profile = ({ setToken }) => {
                         <Question count={count.current} />
                     </div>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         </>
     )

@@ -15,7 +15,7 @@ const Graph = () => {
             .select(svgRef.current)
             .attr("width", w)
             .attr("height", h)
-            .style("background", "#d3d3d3")
+            .style("background", "#50DFA1")
             .style("margin-top", "20")
             .style('overflow', 'visible')
             .style('margin-left', '20')
