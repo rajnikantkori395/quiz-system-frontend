@@ -53,7 +53,7 @@ export const Login = ({ setToken }) => {
         setToken(token);
         if (token) {
             console.log('token', token);
-            navigate('/profile')
+            navigate('/')
         }
         else {
             alert('unauthorized access');
