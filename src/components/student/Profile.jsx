@@ -43,7 +43,7 @@ export const Profile = ({ setToken }) => {
                                 <h5 className='col-sm-1'><button className='btn btn-outline-light' onClick={() => {
                                     setToken(null);
                                     localStorage.clear();
-                                    navigate('/login');
+                                    navigate('/');
                                 }}>Logout</button></h5>
                             </div>
                         </h5>
