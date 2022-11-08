@@ -27,9 +27,14 @@ export const Question = () => {
         getQuestion();
     }
     function handleClick() {
-        getAnswer();
+        return getAnswer();
     }
 
+    const scorelist = () => {
+        let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+        temp_array.push(score + 5);
+        localStorage.setItem('scoreData', JSON.stringify(temp_array));
+    }
     function getAnswer() {
         if (questionCount.current == 10) {
             // alert('done',score)
@@ -38,27 +43,23 @@ export const Question = () => {
         else {
             if (ques.correct === answer) {
                 if (difficulty.current === 10) {
-                    let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
-                    temp_array.push(score + 5);
-                    localStorage.setItem('scoreData', JSON.stringify(temp_array));
+                    scorelist();
                     // setScore(score + 5);
                     return navigate('/score', { state: score + 5 });
                 }
-                let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
-                temp_array.push(score);
-                localStorage.setItem('scoreData', JSON.stringify(temp_array));
                 setScore(score + 5);
+                scorelist();
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
-                    let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
-                    temp_array.push(score - 2);
-                    localStorage.setItem('scoreData', JSON.stringify(temp_array));
+                    scorelist();
                     // setScore(score - 2);
                     return navigate('/score', { state: score - 2 });
                 }
+
                 setScore(score - 2);
+                scorelist();
                 difficulty.current = difficulty.current - 1;
             }
             getQuestion();
