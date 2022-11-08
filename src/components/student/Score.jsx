@@ -23,7 +23,7 @@ export const Score = ({ setToken }) => {
                             }}>Logout</button></h5>
                             <h5 className='col mx-1'><button className='btn btn-outline-dark' onClick={() => {
                                 localStorage.removeItem('scoreData');
-                                navigate('/profile');
+                                navigate('/');
                             }}>Replay</button></h5>
                         </div>
                     </div>
