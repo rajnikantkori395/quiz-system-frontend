@@ -122,7 +122,7 @@ export const Panel = ({ setToken }) => {
                             <button className='btn btn-outline-dark' onClick={() => {
                                 setToken(null);
                                 localStorage.clear();
-                                navigate('/login');
+                                navigate('/');
                             }}>Logout</button>
                         </div>
                         <div className='col-lg-4'>
