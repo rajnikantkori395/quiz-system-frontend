@@ -13,7 +13,7 @@ export const Footer = () => {
             </div>
             <div className="card-body">
                 <blockquote className="blockquote mb-0">
-                    <p>Every correct answer conatains 5 marks and every wrong answer minus 2 marks.</p>
+                    <p>Every correct answer gives 5 marks and every wrong answer deducts 2 marks.</p>
                     <footer className="blockquote-footer"><cite title="Source Title">Admin</cite></footer>
                 </blockquote>
             </div>

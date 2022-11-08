@@ -9,8 +9,8 @@ const Graph = () => {
 
     useEffect(() => {
         //Setting up svg
-        const w = 400;
-        const h = 100;
+        const w = 300;
+        const h = 130;
         const svg = d3
             .select(svgRef.current)
             .attr("width", w)
@@ -20,7 +20,7 @@ const Graph = () => {
             .style('overflow', 'visible')
             .style('margin-left', '20')
             .style('margin-bottom', '20')
-            .style('padding-right', '20')
+        
 
         //Setting the scale
         const xScale = d3
